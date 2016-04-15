@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="zh-cn">
   <head>
-    <title>Sixshop</title>
+    <title>test</title>
     <%= csrf_meta_tags %>
     <%= action_cable_meta_tag %>
 
@@ -33,7 +33,7 @@
                 <%= link_to('Sign out', destroy_user_session_path, :method => :delete) %> 
                 </li>
                 <li>
-                <%= link_to('修改密码', edit_registration_path(:user)) %>
+                <%= link_to('Account', edit_registration_path(:user)) %>
                 </li>
               <% else %>
                 <li>

@@ -34,8 +34,17 @@ gem 'devise', git: 'https://github.com/plataformatec/devise.git'
 #权限相关
 gem 'cancan'
 gem 'rolify'
+
+# 分页
+gem 'will_paginate'
+
+# 搜索
+gem 'elasticsearch-model'
+gem 'elasticsearch-rails'
+
 #表单
 gem 'simple_form'
+
 #样式
 # gem 'twitter-bootstrap-rails'
 # gem 'bootstrap', '~> 4.0.0.alpha3'

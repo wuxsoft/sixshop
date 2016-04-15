@@ -1,4 +1,20 @@
 Rails.application.routes.draw do
+  namespace :admin do
+    get 'rols/index'
+  end
+
+  namespace :admin do
+    get 'rols/new'
+  end
+
+  namespace :admin do
+    get 'rols/destory'
+  end
+
+  namespace :admin do
+    get 'home/index'
+  end
+
   devise_for :users
   get 'home/index'
   get 'home/about'
