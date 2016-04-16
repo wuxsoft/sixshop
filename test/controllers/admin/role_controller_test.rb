@@ -1,18 +1,18 @@
 require 'test_helper'
 
-class Admin::RolsControllerTest < ActionDispatch::IntegrationTest
+class Admin::RoleControllerTest < ActionDispatch::IntegrationTest
   test "should get index" do
-    get admin_rols_index_url
+    get admin_role_index_url
     assert_response :success
   end
 
   test "should get new" do
-    get admin_rols_new_url
+    get admin_role_new_url
     assert_response :success
   end
 
-  test "should get destory" do
-    get admin_rols_destory_url
+  test "should get show" do
+    get admin_role_show_url
     assert_response :success
   end
 
