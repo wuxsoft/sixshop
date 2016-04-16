@@ -1,5 +1,9 @@
 Rails.application.routes.draw do
   namespace :admin do
+    get 'role/edit'
+  end
+
+  namespace :admin do
     get 'role/index'
   end
 

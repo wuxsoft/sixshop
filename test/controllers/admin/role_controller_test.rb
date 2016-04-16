@@ -16,4 +16,9 @@ class Admin::RoleControllerTest < ActionDispatch::IntegrationTest
     assert_response :success
   end
 
+  test "should get edit" do
+    get admin_role_edit_url
+    assert_response :success
+  end
+
 end

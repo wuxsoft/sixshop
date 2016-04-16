@@ -26,7 +26,7 @@
     <td><%= role.created_at.to_date %></td>
     <td><%= role.updated_at.to_date %></td>
     <td>
-      <%= link_to '', admin_rols_new_path(role.id), class: "fa fa-pencil" %>
+      <%= link_to 'edit', admin_role_edit_path(role.id), class: "fa fa-pencil" %>
     </td>
   </tr>
 <% end %>
