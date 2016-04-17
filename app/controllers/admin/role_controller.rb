@@ -15,6 +15,6 @@ class Admin::RoleController < Admin::ApplicationController
   end
 
   def edit
-    @role = Role.find(params[:id])
+    @role = Role.find(params[:format])
   end
 end
