@@ -1,34 +1,8 @@
 Rails.application.routes.draw do
   namespace :admin do
-    get 'role/edit'
-  end
-
-  namespace :admin do
-    get 'role/index'
-  end
-
-  namespace :admin do
-    get 'role/new'
-  end
-
-  namespace :admin do
-    get 'role/show'
-  end
-
-  namespace :admin do
-    get 'rols/index'
-  end
-
-  namespace :admin do
-    get 'rols/new'
-  end
-
-  namespace :admin do
-    get 'rols/destory'
-  end
-
-  namespace :admin do
-    get 'home/index'
+    resources :role
+    resources :home
+    root :to => "role#index"
   end
 
   devise_for :users
