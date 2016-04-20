@@ -1,2 +1,5 @@
-<h1>Admin::Users#edit</h1>
-<p>Find me in app/views/admin/users/edit.html.erb</p>
+<% content_for :sitemap do %>
+  <a href="<%= admin_users_path %>">Users</a> &gt; <span class="current">Edit</span>
+<% end %>
+<h1>Editing User</h1>
+<%= render "form"%>

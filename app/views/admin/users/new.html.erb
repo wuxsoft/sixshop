@@ -1,2 +1,5 @@
-<h1>Admin::Users#new</h1>
-<p>Find me in app/views/admin/users/new.html.erb</p>
+<% content_for :sitemap do %>
+  <a href="<%= admin_users_path %>">Users</a> &gt; <span class="current">Create</span>
+<% end %>
+<h1>Create User</h1>
+<%= render "form"%>

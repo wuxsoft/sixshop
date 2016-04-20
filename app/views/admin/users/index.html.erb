@@ -1,2 +1,40 @@
-<h1>Admin::Users#index</h1>
-<p>Find me in app/views/admin/users/index.html.erb</p>
+<% content_for :sitemap do %>
+  <span class="current">会员</span>
+<% end %>
+<div class="toolbar">
+  <%= link_to 'add user',  new_admin_user_path, class: "fa fa-pencil" %>
+  <!---->
+  <form class="form-inline" action="<%= admin_users_path %>">
+    <div class="form-group">
+      <input type="text" name="q" class="form-control" value="<%= params[:q] %>" placeholder="会员" />
+    </div>
+    <button class="btn btn-default">搜索</button>
+  </form>
+</div>
+
+<table class="table table-bordered table-striped table-condensed">
+  <tr class="head">
+    <td class="first">#</td>
+    <td>邮箱</td>
+    <td>创建时间</td>
+    <td>修改时间</td>
+    <td>操作</td>
+  </tr>
+
+<% @users.each do |user| %>
+  <tr>
+    <td class="first"><%= user.id %></td>
+    <td><%= user.email %></td>
+    <td><%= user.created_at.to_date %></td>
+    <td><%= user.updated_at.to_date %></td>
+    <td>
+      <% if user.id!=1%>
+        <%= link_to 'edit',  edit_admin_user_path(user.id), class: "fa fa-pencil" %>
+        <%= link_to 'destory',  admin_user_path(user.id), method: :delete, class: "fa fa-pencil",'data-confirm' => '警告！此动作无法撤销，确定要删除么?'%>
+
+      <%end%>
+    </td>
+  </tr>
+<% end %>
+</table>
+<%= will_paginate @users %>
