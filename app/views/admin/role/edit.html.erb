@@ -1,8 +1,0 @@
-<h1>Editing Role</h1>
-<%= simple_form_for ([:admin,@role]) do |f| %>
-  <h2 class="form-signin-heading">edit role</h2>
-  <%= f.label :name ,class:'sr-only' %>
-  <%= f.input :name, autofocus: true,placeholder:true, class:'form-control' %>
-
-  <%= f.submit "Save Role" ,class:'btn btn-lg btn-primary btn-block' %>
-<% end %>

@@ -3,7 +3,7 @@
 <% end %>
 <div class="toolbar">
   <%= link_to 'add Role',  new_admin_role_path, class: "fa fa-pencil" %>
-  <form class="form-inline" action="<%= admin_role_index_path %>">
+  <form class="form-inline" action="<%= admin_roles_path %>">
     <div class="form-group">
       <input type="text" name="q" class="form-control" value="<%= params[:q] %>" placeholder="角色名" />
     </div>
@@ -29,6 +29,8 @@
     <td>
       <% if role.id!=1%>
         <%= link_to 'edit',  edit_admin_role_path(role.id), class: "fa fa-pencil" %>
+        <%= link_to 'destory',  admin_role_path(role.id), method: :delete, class: "fa fa-pencil",'data-confirm' => '警告！此动作无法撤销，确定要删除么?'%>
+
       <%end%>
     </td>
   </tr>
