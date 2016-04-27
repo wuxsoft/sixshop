@@ -36,6 +36,7 @@ def index
 
   def edit
     @user = User.find(params[:id])
+    @roles = Role.limit(100)
   end
 
   def update
@@ -43,6 +44,10 @@ def index
       redirect_to admin_users_path
       return 
     end 
+    role_ids = params[:roles_id]
+    if (role_ids)
+      return 
+    end
     @olduser =  User.where("email = ? AND id <> ?", params[:email], params[:d])
     if @olduser.count > 0
         redirect_to(edit_admin_user_path, alert: 'Is Exist User email.')
@@ -52,7 +57,9 @@ def index
     @user = User.find(params[:id])
     @user.email = params[:email]
     @user.updated_at = Time.new
-    if @user.update_attributes(params[:user].permit!)
+    @roles = Role.where(id:role_ids)
+    @user.roles = @roles
+    if @user.update_attributes(params[:user].permit! )
         redirect_to(admin_users_path, notice: 'User was successfully updated.')
       else
         redirect_to admin_users_path

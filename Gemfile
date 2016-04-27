@@ -32,7 +32,8 @@ gem 'jbuilder', '~> 2.0'
 #角色系统
 gem 'devise', git: 'https://github.com/plataformatec/devise.git'
 #权限相关
-gem 'cancan'
+#gem 'cancan'
+gem 'cancancan'
 gem 'rolify'
 
 # 分页

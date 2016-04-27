@@ -3,6 +3,14 @@
   <h2 class="form-signin-heading">edit role</h2>
   <%= f.label :email ,class:'sr-only' %>
   <%= f.input :email, autofocus: true,placeholder:true, class:'form-control' %>
+  <% @roles.each do |role| %>
+    <input type="checkbox" name="roles_is" id="role_id_<%= role.id %>" value="<%= role.id %>"
 
+    <% if @user.has_role? role.name %>
+      checked = 'checked'      
+    <%end%>
+    >
+    <label for="role_id_<%= role.id %>"><%= role.name %></label>    
+  <% end %>
   <%= f.submit "Save User" ,class:'btn btn-lg btn-primary btn-block' %>
 <% end %>
