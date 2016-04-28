@@ -57,8 +57,10 @@ def index
     @user = User.find(params[:id])
     @user.email = params[:email]
     @user.updated_at = Time.new
-    @roles = Role.where(id:role_ids)
-    @user.roles = @roles
+    #roles = Role.where(id:role_ids)
+    #@user.roles = roles
+    #@user.roles.concat(roles)
+    @user.role_ids  = Role.where(id: params[:role_ids]).pluck(:id)
     if @user.update_attributes(params[:user].permit! )
         redirect_to(admin_users_path, notice: 'User was successfully updated.')
       else
