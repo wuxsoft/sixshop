@@ -3,7 +3,7 @@ Rails.application.routes.draw do
     resources :roles
     resources :home
     resources :users
-    root :to => "roles#index"
+    root :to => "users#index"
   end
 
   devise_for :users
