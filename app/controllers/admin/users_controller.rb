@@ -1,4 +1,9 @@
 class Admin::UsersController < Admin::ApplicationController
+  #当执行 show edit update destroy 之前先执行 set_user
+  before_action :set_user, only: [:show, :edit, :update, :destroy]
+  #当执行 edit update destroy 之前先执行 require_not_root
+  before_action :require_not_root, only: [:edit, :update, :destroy]
+
 def index
     @users = User.all
     if params[:q]
@@ -9,20 +14,14 @@ def index
 
   def new
     @user = User.new
+    @roles = Role.limit(100)
   end
 
   def create
-    @olduser =  User.where("email = ?",params[:user][:email])
-    if @olduser.count > 0
-        redirect_to(new_admin_user_path, alert: 'Is Exist User email.')
-        return
-    end
-
     @user = User.new(params[:user].permit!)
     @user.email = params[:user][:email]
-    @user.encrypted_password  = '88888888'
-    @user.updated_at = Time.new
-    @user.created_at = Time.new
+    @user.password = '88888888'
+    @user.password_confirmation  = '88888888'
     if @user.save
       redirect_to(admin_users_path, notice: 'User was successfully created.')
     else
@@ -31,54 +30,52 @@ def index
   end
 
   def show
-    @user = User.find(params[:id])
+    
   end
 
   def edit
-    @user = User.find(params[:id])
     @roles = Role.limit(100)
   end
 
   def update
-    if(params[:id]==1)
-      redirect_to admin_users_path
-      return 
-    end 
-    role_ids = params[:roles_id]
-    if (role_ids)
-      return 
-    end
-    @olduser =  User.where("email = ? AND id <> ?", params[:email], params[:d])
-    if @olduser.count > 0
-        redirect_to(edit_admin_user_path, alert: 'Is Exist User email.')
-        return
-    end
+    # role_ids = params[:roles_id]
+    # if (role_ids)
+    #   return 
+    # end
+    # @user.email = params[:email]
+    # #roles = Role.where(id:role_ids)
+    # #@user.roles = roles
+    # #@user.roles.concat(roles)
+    # @user.role_ids  = Role.where(id: params[:role_ids]).pluck(:id)
+    # if @user.update_attributes(params[:user].permit! )
+    #     redirect_to(admin_users_path, notice: 'User was successfully updated.')
+    #   else
+    #     redirect_to admin_users_path
+    # end
 
-    @user = User.find(params[:id])
-    @user.email = params[:email]
-    @user.updated_at = Time.new
-    #roles = Role.where(id:role_ids)
-    #@user.roles = roles
-    #@user.roles.concat(roles)
-    @user.role_ids  = Role.where(id: params[:role_ids]).pluck(:id)
-    if @user.update_attributes(params[:user].permit! )
-        redirect_to(admin_users_path, notice: 'User was successfully updated.')
-      else
-        redirect_to admin_users_path
+    if @user.update_attributes(params[:user].permit!)
+      redirect_to(admin_users_path, notice: 'User was successfully updated.')
+    else
+      redirect_to admin_users_path
     end
   end
 
   def destroy
-    if(params[:id]==1)
-      redirect_to admin_users_path
-      return 
-    end
     @user = User.find(params[:id])
     if @user.destroy
       redirect_to(admin_users_path, notice: 'User was successfully deleted.')
     else
       redirect_to(admin_users_path, alert: 'User was error deleted.')
     end
+  end
 
+  def set_user
+    @user = User.find(params[:id])
+  end
+
+  def require_not_root
+    if @user.root?
+      redirect_to(admin_users_path, alert: 'You can not change admin user.')
+    end
   end
 end
